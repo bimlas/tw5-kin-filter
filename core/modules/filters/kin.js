@@ -12,6 +12,17 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	/*global $tw: true */
 	"use strict";
 
+	function getObjectKeysByExpression(object,callback) {
+		var key,
+			results = [];
+		for (key in object) {
+			if (object.hasOwnProperty(key) && callback(object[key])) {
+			results.push(key);
+			}
+		}
+		return results;
+	};
+
 	function collectTitlesRecursively(baseTiddler,baseTitle,options) {
 		var cacheName = "kin-filter-" + baseTitle + "-" + options.fieldName + "-",
 			titlesPointingFromBase = {},
@@ -41,7 +52,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		function collectTitlesPointingTo(title,currentDepth) {
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title,currentDepth)) {
 				currentDepth += 1;
-				$tw.utils.each(options.wiki.findTiddlersByField(title,options.fieldName),function(targetTitle) {
+				$tw.utils.each(options.wiki.findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle,currentDepth);
 				});
 			}
@@ -49,7 +60,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 
 		function getResultsInGivenDepth(cachedData) {
 			if(options.depth) {
-				return $tw.utils.getObjectKeysByExpression(cachedData,function(value) {
+				return getObjectKeysByExpression(cachedData,function(value) {
 					return value <= options.depth;
 				})
 			} else {
