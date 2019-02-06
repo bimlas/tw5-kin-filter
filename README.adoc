@@ -5,6 +5,9 @@
 
 For details, see the link:{demo-page}[demo page].
 
+* https://gitlab.com/bimlas/tw5-kin-filter (official repository)
+* https://github.com/bimlas/tw5-kin-filter (mirror, please give a star if you like it)
+
 == How to install?
 
 === Drag-n-drop
@@ -18,13 +21,10 @@ For details, see the link:{demo-page}[demo page].
   loaded)
 - Drag-n-drop the file in to your wiki
 
-== How to use in Node version of TiddlyWiki
-
-=== TiddlyWiki installed via NPM
+=== Copy to directory based (Node.js) wiki
 
 - Clone or download this repository
-- Run `tiddlywiki --listen` in the root of this repository
-- Open `localhost:8080` in your browser
+- Copy the `plugins` directory to the root directory of your wiki
 
 == Development
 
@@ -32,6 +32,11 @@ For details, see the link:{demo-page}[demo page].
 
 ----
 $ cd ROOT_OF_THIS_REPO
+
+# Unix-like system
 $ export TIDDLYWIKI_PLUGIN_PATH=./plugins
+# Windows
+$ set TIDDLYWIKI_PLUGIN_PATH=./plugins
+
 $ tiddlywiki test
 ----

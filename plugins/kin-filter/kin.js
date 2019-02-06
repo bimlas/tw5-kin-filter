@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/filters/kin.js
+title: $:/plugins/bimlas/kin-filter/kin.js
 type: application/javascript
 module-type: filteroperator
 
@@ -11,17 +11,6 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	/*jslint node: true, browser: true */
 	/*global $tw: true */
 	"use strict";
-
-	function getObjectKeysByExpression(object,callback) {
-		var key,
-			results = [];
-		for (key in object) {
-			if (object.hasOwnProperty(key) && callback(object[key])) {
-			results.push(key);
-			}
-		}
-		return results;
-	};
 
 	function collectTitlesRecursively(baseTiddler,baseTitle,options) {
 		var cacheName = "kin-filter-" + baseTitle + "-" + options.fieldName + "-",
@@ -56,6 +45,17 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 					collectTitlesPointingTo(targetTitle,currentDepth);
 				});
 			}
+		}
+
+		function getObjectKeysByExpression(object,callback) {
+			var key,
+				results = [];
+			for (key in object) {
+				if (object.hasOwnProperty(key) && callback(object[key])) {
+					results.push(key);
+				}
+			}
+			return results;
 		}
 
 		function getResultsInGivenDepth(cachedData) {

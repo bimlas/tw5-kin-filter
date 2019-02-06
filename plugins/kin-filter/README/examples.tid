@@ -1,7 +1,4 @@
-created: 20181026114434874
-modified: 20181108070317997
-tags: [[Operator Examples]] [[kin Operator]]
-title: kin Operator (Examples)
+title: $:/plugins/bimlas/kin-filter/README/examples
 type: text/vnd.tiddlywiki
 
 \define item-class(highlightfilter) <$list filter="""[$highlightfilter$is[current]first[]]""">highlighted-toc-item</$list>
