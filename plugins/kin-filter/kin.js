@@ -19,6 +19,19 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			resultsFrom = [],
 			resultsTo = [];
 
+		/* Copy of findListingsOfTiddler, but it's searching in shadows as well. */
+		function findListingsOfTiddler(targetTitle,fieldName) {
+			fieldName = fieldName || "list";
+			var titles = [];
+			options.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
+				var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
+				if(list && list.indexOf(targetTitle) !== -1) {
+					titles.push(title);
+				}
+			});
+			return titles;
+		}
+
 		function addToResultsIfNotFoundAlready(alreadyFound,title,depth) {
 			if(title in alreadyFound) {
 				return false;
@@ -41,7 +54,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		function collectTitlesPointingTo(title,currentDepth) {
 			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title,currentDepth)) {
 				currentDepth += 1;
-				$tw.utils.each(options.wiki.findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
+				$tw.utils.each(findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
 					collectTitlesPointingTo(targetTitle,currentDepth);
 				});
 			}
