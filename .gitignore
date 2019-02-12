@@ -2,3 +2,4 @@
 /*.iml
 /package*.json
 /node_modules
+**/$__StoryList.tid
