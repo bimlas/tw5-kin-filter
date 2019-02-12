@@ -8,6 +8,7 @@ type: text/vnd.tiddlywiki
 
 The purpose of the ''kin'' operator with examples:
 
+* Finds related tags, related tiddlers in any depth
 * Finds out where base tiddler originates and what other elements originate from it
 * Finds the ancestors and successors of a family member
 * Finds the "leaves" of the branch of the base tiddler in a tree-like structure (where the base tiddler is a leaf)
