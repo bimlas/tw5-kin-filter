@@ -37,3 +37,13 @@ The ''kin'' operator uses an extended syntax that permits multiple fields and fl
 * ''operand'': filter operand, the base tiddler
 
 ''kin'' is a [[modifier|https://tiddlywiki.com/#Selection%20Constructors]], but without ''B'' parameter is a [[constructor|https://tiddlywiki.com/#Selection%20Constructors]].
+
+!! Installation instructions
+
+To add the plugin to your own ~TiddlyWiki5, just drag this link to the browser window:
+
+$:/plugins/bimlas/kin-filter
+
+For other installation options see the repositories above.
+
+//Select the next tab to continue.//
