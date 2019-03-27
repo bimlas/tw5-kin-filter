@@ -1,0 +1,21 @@
+created: 20190109181535967
+modified: 20190327073623505
+tags: TableOfContents
+title: Family tree of Ford
+type: text/vnd.tiddlywiki
+
+To make it easier to understand and try out the plugin, search the Ford family tree tiddlers with the filter expressions from the documentation in the [[$:/AdvancedSearch]] -> Filter (see below this picture).
+
+[img[ford.png]]
+
+//Image taken from https://hu.pinterest.com/pin/16747829837549219/ //
+
+Table of contents representation:
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'Family tree of Ford'>>
+
+</div>
+
+{{ $:/AdvancedSearch}}
