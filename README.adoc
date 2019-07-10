@@ -8,6 +8,23 @@ For details, see the link:{demo-page}[demo page].
 * https://gitlab.com/bimlas/tw5-kin-filter (official repository)
 * https://github.com/bimlas/tw5-kin-filter (mirror, please star if you like it)
 
+== What others say about it?
+
+"...it is so elegant and powerful that in someways, it is hard to believe."
+-- https://groups.google.com/d/msg/tiddlywiki/YZlPGP0qX1o/Qh-sAWEuCQAJ[TonyM]
+
+"...it is incredibly powerful..."
+-- https://groups.google.com/d/msg/tiddlywiki/YZlPGP0qX1o/pxFtAmS7AgAJ[LorenzGL]
+
+"Great tool and unique in the field."
+-- https://groups.google.com/d/msg/tiddlywiki/-oXz38N1BM4/AVKjrOnlAwAJ[Mohammad]
+
+"Thank you so much for you work on this, and the excellent documentation complete with figures!"
+-- https://groups.google.com/d/msg/tiddlywiki/YZlPGP0qX1o/NtTBuVPUBgAJ[Diego Mesa]
+
+"Thanks @bimlas this is a high quality PR, and I appreciate the care you've taken with the documentation particularly."
+-- https://github.com/Jermolene/TiddlyWiki5/pull/3511#pullrequestreview-176711457[Jermolene]
+
 == How to install?
 
 === Drag-n-drop
