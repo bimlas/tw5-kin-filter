@@ -1,12 +1,11 @@
-:demo-page: https://bimlas.gitlab.io/tw5-kin-filter
-:json: https://bimlas.gitlab.io/tw5-kin-filter/tw5-kin-filter.json
+:demo-page: https://bimlas.github.io/tw5-kin-filter
+:json: https://bimlas.github.io/tw5-kin-filter/tw5-kin-filter.json
 
 = Kin filter plugin for TiddlyWiki 5
 
 For details, see the link:{demo-page}[demo page].
 
-* https://gitlab.com/bimlas/tw5-kin-filter (official repository)
-* https://github.com/bimlas/tw5-kin-filter (mirror, please star if you like it)
+* https://github.com/bimlas/tw5-kin-filter (please star if you like it)
 
 == What others say about it?
 
