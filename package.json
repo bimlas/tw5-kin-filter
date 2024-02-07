@@ -3,8 +3,11 @@
   "author": "bimlas",
   "scripts": {
     "build": "npm run build:html; npm run build:json",
-    "build:html": "TIDDLYWIKI_PLUGIN_PATH=plugins tiddlywiki --build index",
-    "build:json": "TIDDLYWIKI_PLUGIN_PATH=plugins tiddlywiki --render '$:/plugins/bimlas/kin-filter' tw5-kin-filter.json text/plain '$:/core/templates/json-tiddler'"
+    "build:html": "tiddlywiki --build index",
+    "build:json": "tiddlywiki --build json",
+    "test": "TIDDLYWIKI_PLUGIN_PATH=plugins tiddlywiki tests --test",
+    "test:performance": "TIDDLYWIKI_PLUGIN_PATH=plugins tiddlywiki tests --fetch file 'https://tiddlywiki.com/' '' '' --test",
+    "wiki": "npm run build:json; tiddlywiki NONE --load output/tw5-kin-filter.json --fetch file 'https://tiddlywiki.com/' '' '' --listen port=8888"
   },
   "dependencies": {
     "tiddlywiki": "^5.3.3"

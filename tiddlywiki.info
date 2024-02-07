@@ -16,43 +16,12 @@
             "index.html",
             "text/plain"
         ],
-        "externalimages": [
-            "--savetiddlers",
-            "[is[image]]",
-            "images",
-            "--setfield",
-            "[is[image]]",
-            "_canonical_uri",
-            "$:/core/templates/canonical-uri-external-image",
+        "json": [
+            "--render",
+            "$:/plugins/bimlas/kin-filter",
+            "tw5-kin-filter.json",
             "text/plain",
-            "--setfield",
-            "[is[image]]",
-            "text",
-            "",
-            "text/plain",
-            "--rendertiddler",
-            "$:/plugins/tiddlywiki/tiddlyweb/save/offline",
-            "externalimages.html",
-            "text/plain"
-        ],
-        "static": [
-            "--rendertiddler",
-            "$:/core/templates/static.template.html",
-            "static.html",
-            "text/plain",
-            "--rendertiddler",
-            "$:/core/templates/alltiddlers.template.html",
-            "alltiddlers.html",
-            "text/plain",
-            "--rendertiddlers",
-            "[!is[system]]",
-            "$:/core/templates/static.tiddler.html",
-            "static",
-            "text/plain",
-            "--rendertiddler",
-            "$:/core/templates/static.template.css",
-            "static/static.css",
-            "text/plain"
+            "$:/core/templates/json-tiddler"
         ]
     }
 }

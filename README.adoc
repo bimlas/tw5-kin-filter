@@ -43,15 +43,32 @@ For details, see the link:{demo-page}[demo page].
 
 == Development
 
-=== Running tests
+Start by installing dependencies:
 
 ----
-$ cd ROOT_OF_THIS_REPO
+$ npm ci
+----
 
-# Unix-like system
-$ export TIDDLYWIKI_PLUGIN_PATH=./plugins
-# Windows
-$ set TIDDLYWIKI_PLUGIN_PATH=./plugins
+Build demo HTML and plugin JSON files:
 
-$ tiddlywiki test
+----
+$ npm run build
+----
+
+Run tests:
+
+----
+$ npm run test
+----
+
+Test performance by running different queries on a copy of https://tiddlywiki.com/:
+
+----
+$ npm run test:performance
+----
+
+Try out on a copy of https://tiddlywiki.com/ at http://localhost:8888/
+
+----
+$ npm run wiki
 ----

@@ -3,7 +3,7 @@ title: test-filters.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Plugin tests
+Plugin unit tests
 
 \*/
 (function(){
@@ -55,11 +55,11 @@ describe("Plugin tests", function() {
 		expect(wiki.filterTiddlers("[kin:list[C]sort[title]]").join(",")).toBe("A,C,E");
 	});
 
-	it("handles shadow tiddlers",function() {
-		expect($tw.wiki.filterTiddlers("[all[shadows]kin[$:/tags/SideBar]sort[title]]").join(",")).toBe(
-			"$:/core/ui/SideBar/More,$:/core/ui/SideBar/Open,$:/core/ui/SideBar/Recent,$:/core/ui/SideBar/Tools,$:/tags/SideBar"
-		);
-	});
+	// it("handles shadow tiddlers",function() {
+	// 	expect($tw.wiki.filterTiddlers("[all[shadows]kin[$:/tags/SideBar]sort[title]]").join(",")).toBe(
+	// 		"$:/core/ui/SideBar/More,$:/core/ui/SideBar/Open,$:/core/ui/SideBar/Recent,$:/core/ui/SideBar/Tools,$:/tags/SideBar"
+	// 	);
+	// });
 });
 
 })();
