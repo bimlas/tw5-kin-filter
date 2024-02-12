@@ -24,8 +24,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			fieldName = fieldName || "list";
 			var titles = [];
 			options.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
-				var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
-				if(list && list.indexOf(targetTitle) !== -1) {
+				if(tiddler.getFieldList(fieldName).indexOf(targetTitle) !== -1) {
 					titles.push(title);
 				}
 			});
@@ -33,7 +32,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		}
 
 		function addToResultsIfNotFoundAlready(alreadyFound,title,depth) {
-			if(title in alreadyFound) {
+			if($tw.utils.hop(alreadyFound,title)) {
 				return false;
 			}
 			alreadyFound[title] = depth;
@@ -60,22 +59,15 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			}
 		}
 
-		function getObjectKeysByExpression(object,callback) {
-			var key,
-				results = [];
-			for (key in object) {
-				if (object.hasOwnProperty(key) && callback(object[key])) {
-					results.push(key);
-				}
-			}
-			return results;
-		}
-
 		function getResultsInGivenDepth(cachedData) {
 			if(options.depth) {
-				return getObjectKeysByExpression(cachedData,function(value) {
-					return value <= options.depth;
-				})
+				var results = [];
+				$tw.utils.each(cachedData,function(value,key){
+					if(value <= options.depth) {
+						results.push(key);
+					}
+				});
+				return results;
 			} else {
 				return Object.keys(cachedData);
 			}
