@@ -12,12 +12,9 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	/*global $tw: true */
 	"use strict";
 
-	function collectTitlesRecursively(baseTiddler,baseTitle,options) {
+	function collectTitlesRecursively(baseTitle,options) {
 		var cacheName = "kin-filter-" + baseTitle + "-" + options.fieldName + "-",
-			titlesPointingFromBase = {},
-			titlesPointingToBase = {},
-			resultsFrom = [],
-			resultsTo = [];
+			results = [];
 
 		/* Copy of findListingsOfTiddler, but it's searching in shadows as well. */
 		function findListingsOfTiddler(targetTitle,fieldName) {
@@ -39,22 +36,23 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			return true
 		}
 
-		function collectTitlesPointingFrom(tiddler,title,currentDepth) {
-			if(addToResultsIfNotFoundAlready(titlesPointingFromBase,title,currentDepth)) {
+		function collectTitlesPointingFrom(results,title,currentDepth) {
+			if(addToResultsIfNotFoundAlready(results,title,currentDepth)) {
 				currentDepth += 1;
+				var tiddler = options.wiki.getTiddler(title);
 				if(tiddler) {
 					$tw.utils.each(tiddler.getFieldList(options.fieldName),function(targetTitle) {
-						collectTitlesPointingFrom(options.wiki.getTiddler(targetTitle),targetTitle,currentDepth);
+						collectTitlesPointingFrom(results,targetTitle,currentDepth);
 					});
 				}
 			}
 		}
 
-		function collectTitlesPointingTo(title,currentDepth) {
-			if(addToResultsIfNotFoundAlready(titlesPointingToBase,title,currentDepth)) {
+		function collectTitlesPointingTo(results,title,currentDepth) {
+			if(addToResultsIfNotFoundAlready(results,title,currentDepth)) {
 				currentDepth += 1;
 				$tw.utils.each(findListingsOfTiddler(title,options.fieldName),function(targetTitle) {
-					collectTitlesPointingTo(targetTitle,currentDepth);
+					collectTitlesPointingTo(results,targetTitle,currentDepth);
 				});
 			}
 		}
@@ -74,20 +72,22 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		}
 
 		if((options.direction === "from") || (options.direction === "with")) {
-			resultsFrom = $tw.wiki.getGlobalCache(cacheName + "from",function() {
-				collectTitlesPointingFrom(baseTiddler,baseTitle,0);
+			var resultsFrom = $tw.wiki.getGlobalCache(cacheName + "from",function() {
+				var titlesPointingFromBase = {}
+				collectTitlesPointingFrom(titlesPointingFromBase,baseTitle,0);
 				return titlesPointingFromBase;
 			});
-			resultsFrom = getResultsInGivenDepth(resultsFrom);
+			$tw.utils.pushTop(results,getResultsInGivenDepth(resultsFrom));
 		}
 		if((options.direction === "to") || (options.direction === "with")) {
-			resultsTo = $tw.wiki.getGlobalCache(cacheName + "to",function() {
-				collectTitlesPointingTo(baseTitle,0);
+			var resultsTo = $tw.wiki.getGlobalCache(cacheName + "to",function() {
+				var titlesPointingToBase = {}
+				collectTitlesPointingTo(titlesPointingToBase,baseTitle,0);
 				return titlesPointingToBase;
 			});
-			resultsTo = getResultsInGivenDepth(resultsTo);
+			$tw.utils.pushTop(results,getResultsInGivenDepth(resultsTo));
 		}
-		return $tw.utils.pushTop(resultsFrom,resultsTo);
+		return results;
 	}
 
 	/*
@@ -110,8 +110,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 
 		if(operator.operand !== "") {
 			var baseTitle = operator.operand,
-				baseTiddler = options.wiki.getTiddler(baseTitle),
-				foundTitles = collectTitlesRecursively(baseTiddler,baseTitle,filterOptions);
+				foundTitles = collectTitlesRecursively(baseTitle,filterOptions);
 
 			source(function(tiddler,title) {
 				if(needsExclusion === (foundTitles.indexOf(title) === -1)) {
@@ -120,7 +119,7 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 			});
 		} else {
 			source(function(tiddler,title) {
-				results = $tw.utils.pushTop(results,collectTitlesRecursively(tiddler,title,filterOptions));
+				results = $tw.utils.pushTop(results,collectTitlesRecursively(title,filterOptions));
 			});
 		}
 
