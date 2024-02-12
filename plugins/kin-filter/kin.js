@@ -96,12 +96,12 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 	exports.kin = function(source,operator,options) {
 		var results = [],
 			needsExclusion = operator.prefix === "!",
-			suffixes = operator.suffixes || [],
+                        suffixes = operator.suffixes || [],
 			filterOptions = {
 				wiki: options.wiki,
-				fieldName: ((suffixes[0] || [])[0] || "tags").toLowerCase(),
-				direction: ((suffixes[1] || [])[0] || "with").toLowerCase(),
-				depth: Number((suffixes[2] || [])[0]),
+				fieldName: (suffixes[0] && suffixes[0][0]) || "tags",
+				direction: (suffixes[1] && suffixes[1][0]) || "with",
+				depth: Number((suffixes[2] && suffixes[2][0]) || 0),
 			};
 
 		if((operator.operand === "") && (needsExclusion)) {
