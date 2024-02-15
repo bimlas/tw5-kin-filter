@@ -19,13 +19,24 @@ Finds out where a tiddler originates from and what other tiddlers originate from
 		/* Copy of findListingsOfTiddler, but it's searching in shadows as well. */
 		function findListingsOfTiddler(targetTitle,fieldName) {
 			fieldName = fieldName || "list";
-			var titles = [];
-			options.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
-				if(tiddler.getFieldList(fieldName).indexOf(targetTitle) !== -1) {
-					titles.push(title);
-				}
+			var listings = options.wiki.getGlobalCache("kin-filter-listings-" + fieldName,function() {
+				var listings = Object.create(null);
+				options.wiki.eachTiddlerPlusShadows(function(tiddler,title) {
+					var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
+					if(list) {
+						for(var i = 0; i < list.length; i++) {
+							var listItem = list[i],
+								listing = listings[listItem] || [];
+							if (listing.indexOf(title) === -1) {
+								listing.push(title);
+							}
+							listings[listItem] = listing;
+						}
+					}
+				});
+				return listings;
 			});
-			return titles;
+			return listings[targetTitle] || [];
 		}
 
 		function addToResultsIfNotFoundAlready(alreadyFound,title,depth) {
