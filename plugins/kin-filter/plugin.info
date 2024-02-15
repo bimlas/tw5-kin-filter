@@ -2,9 +2,9 @@
 	"title": "$:/plugins/bimlas/kin-filter",
 	"description": "Kin filter: Recursively looking for kinship between tiddler titles",
 	"author": "bimlas",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"core-version": ">=5.1.18",
 	"source": "https://github.com/bimlas/tw5-kin-filter",
 	"plugin-type": "plugin",
-	"list": "README/syntax README/examples"
+	"list": "README/README README/examples README/CHANGELOG README/LICENSE"
 }

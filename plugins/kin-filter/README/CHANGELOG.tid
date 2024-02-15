@@ -1,0 +1,18 @@
+tags:
+title: $:/plugins/bimlas/kin-filter/README/CHANGELOG
+type: text/vnd.tiddlywiki
+
+!! 1.0.1
+
+[[See GitHub for detailed change history of this release|https://github.com/bimlas/tw5-kin-filter/compare/v1.0.0...v1.0.1]]
+
+* ''Fix performance issue''
+* Make testing easier
+* Add more examples
+* Add MIT license
+* Remove GitLab repo
+
+
+!! 1.0.0
+
+* First public release
